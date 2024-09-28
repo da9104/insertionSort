@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { ChevronRight } from 'lucide-react'
+import { useState, useEffect } from 'react';
+// import { ChevronRight } from 'lucide-react'
 
 const InsertionSortVisualization = () => {
   const [array, setArray] = useState([5, 2, 4, 6, 1, 3]);
   const [step, setStep] = useState(0);
-  const [sortedIndex, setSortedIndex] = useState(0);
-  const [currentKey, setCurrentKey] = useState(null);
-  const [comparing, setComparing] = useState(null);
+  const [sortedIndex, setSortedIndex] = useState<number | null>(null);
+  const [currentKey, setCurrentKey] = useState<number | null>(null);
+  const [comparing, setComparing] = useState<number | null>(null);
 
   const steps = [
     { description: "Initial array", sortedIndex: 0 },
@@ -32,8 +32,8 @@ const InsertionSortVisualization = () => {
     if (step < steps.length) {
       const currentStep = steps[step];
       setSortedIndex(currentStep.sortedIndex);
-      setCurrentKey(currentStep.key);
-      setComparing(currentStep.comparing);
+      setCurrentKey(currentStep.key ?? null);
+      setComparing(currentStep.comparing ?? null);
 
       if (step > 0) {
         const newArray = [...array];
@@ -66,7 +66,7 @@ const InsertionSortVisualization = () => {
           <div
             key={index}
             className={`w-12 h-12 flex items-center justify-center border border-gray-300 m-1 ${
-              index <= sortedIndex ? 'bg-green-200' : ''
+              index <= (sortedIndex ?? -1) ? 'bg-green-200' : ''
             } ${index === comparing ? 'bg-yellow-200' : ''} ${
               num === currentKey ? 'bg-blue-200' : ''
             }`}
